@@ -19,6 +19,7 @@ epochs=10
 
 model_OR=Perceptron(lr=lr,epochs=epochs)
 model_OR.fit(X,y)
+_=model_OR.total_loss()
 
 save_model(model_OR,filename="AND.model")
 save_plot(df_OR,'OR.png',model_OR)

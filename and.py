@@ -3,22 +3,29 @@ from utils.all_utils import data,save_model,save_plot
 import pandas as pd
 import numpy as np
 
+def main(data1,lr,epochs):
+    
+    df_AND=pd.DataFrame(data1)
+    print(df_AND)
 
-AND={
-    'X1':[0,0,1,1],
-    'X2':[0,1,0,1],
-    'y':[0,0,0,1]
-}
-df_AND=pd.DataFrame(AND)
-print(df_AND)
+    X,y=data(df_AND)
 
-X,y=data(df_AND)
+    lr=0.3
+    epochs=10
 
-lr=0.3
-epochs=10
+    model_AND=Perceptron(lr=lr,epochs=epochs)
+    model_AND.fit(X,y)
+    _=model_AND.total_loss()
 
-model_AND=Perceptron(lr=lr,epochs=epochs)
-model_AND.fit(X,y)
+    save_model(model_AND,filename="AND.model")
+    save_plot(df_AND,'AND.png',model_AND)
 
-save_model(model_AND,filename="AND.model")
-save_plot(df_AND,'AND.png',model_AND)
+if __name__=="__main__":
+    AND={
+        'X1':[0,0,1,1],
+        'X2':[0,1,0,1],
+        'y':[0,0,0,1]
+        }
+    lr=0.3
+    epochs=10
+    main(data1=AND,lr=lr,epochs=epochs)
