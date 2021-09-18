@@ -7,6 +7,14 @@ import os
 plt.style.use("fivethirtyeight")
 
 def data(df):
+  """It is used to seperate the dependent and idependent features
+
+  Args:
+      df (pd.Dataframe): Tables
+
+  Returns:
+      tuple it returns the tuples o dependent fetaure
+  """
   X=df.drop('y',axis=1)
   y=df['y']
   return X,y
