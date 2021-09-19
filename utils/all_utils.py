@@ -20,6 +20,13 @@ def data(df):
   return X,y
 
 def save_model(model,filename):
+  """
+  :param
+
+  Args:
+      model (pythoon object): trained model to
+      filename ([type]): path to save the trained model
+  """
   model_dir='models1'
   os.makedirs(model_dir,exist_ok=True)
   filePath=os.path.join(model_dir,filename )
@@ -29,6 +36,11 @@ def save_model(model,filename):
 
 
 def save_plot(df,file_name,model):
+  """"
+  :param df: its a dataframe 
+  :param file_name=its a path to save the plot 
+  :param model: trained model 
+  """
   def _create_base_plot(df):
     df.plot(kind='scatter',x='X1',y='X2',c='y',s=100,cmap='winter')
     plt.axhline(y=0,color='black',linestyle="--",linewidth=1)
