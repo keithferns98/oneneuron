@@ -6,13 +6,14 @@ import logging
 import os
 
 logging_str="[%(asctime)s:%(levelname)s:%(module)s] %(message)s"
-log_dir="logs"
-os.makedirs(log_dir,exist_ok=True)
-logging.basicConfig(filename=os.path.join(log_dir,'running_log.log'),level=logging.INFO,format=logging_str,filemode='a')
+#log_dir="logs"
+#os.makedirs(log_dir,exist_ok=True)
+#logging.basicConfig(filename=os.path.join(log_dir,'running_log.log'),Level=logging.INFO,format=logging_str,filemode='a')
+logging.basicConfig(level=logging.INFO,format=logging_str)
 def main(data1,lr,epochs):
     
     df_AND=pd.DataFrame(data1)
-    print(df_AND)
+    logging.info(f"This is actual data {df_AND}")
 
     X,y=data(df_AND)
 
