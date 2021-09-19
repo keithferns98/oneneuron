@@ -1,5 +1,6 @@
 import numpy as np
 import logging 
+from tqdm import tqdm
 class Perceptron:
   def __init__(self,lr,epochs):
     self.weights=np.random.randn(3)*1e-4
@@ -12,13 +13,13 @@ class Perceptron:
     return np.where(z>0,1,0)  
   def fit(self,X,y):
     self.X=X
-    self.y=y
+    self.y=y 
 
     X_with_bias=np.c_[self.X,-np.ones((len(self.X),1))] #bias concates with the inputs
     logging.info(f'X with bias vals:\n{X_with_bias}')
 
 
-    for epoch in range(self.epochs):
+    for epoch in tqdm(range(self.epochs),total=self.epochs,desc="training the model"):
         logging.info('--'*10)
         logging.info(f'for epochs: {epoch}')
         y_hat=self.activationFunction(X_with_bias,self.weights)

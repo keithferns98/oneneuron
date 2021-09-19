@@ -4,6 +4,8 @@ import joblib
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import os
+import logging
+
 plt.style.use("fivethirtyeight")
 
 def data(df):
@@ -15,6 +17,7 @@ def data(df):
   Returns:
       tuple it returns the tuples o dependent fetaure
   """
+  logging.info("prepare_Data and also segregating the independent features and dependent features")
   X=df.drop('y',axis=1)
   y=df['y']
   return X,y
@@ -27,11 +30,13 @@ def save_model(model,filename):
       model (pythoon object): trained model to
       filename ([type]): path to save the trained model
   """
+  logging.info('Saving the model')
   model_dir='models1'
   os.makedirs(model_dir,exist_ok=True)
   filePath=os.path.join(model_dir,filename )
   joblib.dump(model,filePath)
   print(filePath)
+  logging.info(f"Saved trained model {filePath}")
 
 
 
@@ -42,6 +47,7 @@ def save_plot(df,file_name,model):
   :param model: trained model 
   """
   def _create_base_plot(df):
+    logging.info("create the base plot")
     df.plot(kind='scatter',x='X1',y='X2',c='y',s=100,cmap='winter')
     plt.axhline(y=0,color='black',linestyle="--",linewidth=1)
     plt.axvline(x=0,color='black',linestyle="--",linewidth=1)
@@ -49,6 +55,7 @@ def save_plot(df,file_name,model):
     figure.set_size_inches(10,8)
 
   def _plot_decision_region(X,y,classifier,resolution=0.02):
+    logging.info("plotting the decision region")
     colors=("red","blue","lightgreen","gray","cyan")
     cmap=ListedColormap(colors[:len(np.unique(y))])
     X=X.values
@@ -73,3 +80,4 @@ def save_plot(df,file_name,model):
   os.makedirs(plot_dir,exist_ok=True)
   plotPath=os.path.join(plot_dir,file_name)
   plt.savefig(plotPath)
+  logging.info(f"Saving the plot at {plotPath}")
